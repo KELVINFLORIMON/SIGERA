@@ -1,11 +1,8 @@
 from datetime import datetime, timedelta, timezone
 from typing import Any, Union
 from jose import jwt
-from passlib.context import CryptContext
+import bcrypt
 from app.core.config import settings
-
-# Contexto de criptografía que usa el algoritmo 'bcrypt' para hashear las contraseñas
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """
@@ -13,14 +10,19 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     la compara con la contraseña encriptada (hasheada) de la base de datos.
     Devuelve True si coinciden, False si no.
     """
-    return pwd_context.verify(plain_password, hashed_password)
+    try:
+        return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
+    except Exception:
+        return False
 
 def get_password_hash(password: str) -> str:
     """
     Toma una contraseña en texto plano y la convierte en un 'hash' indescifrable
     antes de guardarla en la base de datos por seguridad.
     """
-    return pwd_context.hash(password)
+    salt = bcrypt.gensalt()
+    hashed_bytes = bcrypt.hashpw(password.encode('utf-8'), salt)
+    return hashed_bytes.decode('utf-8')
 
 def create_access_token(
     subject: Union[str, Any], expires_delta: timedelta = None
