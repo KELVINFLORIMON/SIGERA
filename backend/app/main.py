@@ -47,6 +47,14 @@ def read_root():
 def health_check():
     return {"status": "ok"}
 
+@app.get("/logs")
+def get_logs():
+    import os
+    if os.path.exists("error.log"):
+        with open("error.log", "r", encoding="utf-8") as f:
+            return {"logs": f.read()}
+    return {"logs": "No error.log found in " + os.getcwd()}
+
 @app.get("/seed")
 def seed_database():
     try:
