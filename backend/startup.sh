@@ -7,6 +7,12 @@ echo "Iniciando despliegue de SIGERA API..."
 echo "Aplicando migraciones de Alembic..."
 alembic upgrade head
 
+echo "Ejecutando semillas de datos iniciales..."
+python seed.py
+python seed_competencias.py
+python seed_regionales.py
+python update_grupos.py || true
+
 # 2. Iniciar el servidor con Gunicorn y Uvicorn workers
 # Usamos 4 workers como estándar para mejor concurrencia
 echo "Levantando el servidor..."
