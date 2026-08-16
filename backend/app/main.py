@@ -57,3 +57,13 @@ def seed_database():
         return {"status": "success", "message": "Base de datos poblada correctamente"}
     except Exception as e:
         return {"status": "error", "message": str(e)}
+
+@app.get("/migrate")
+def migrate_database():
+    import subprocess
+    try:
+        result = subprocess.run(["python", "-m", "alembic", "upgrade", "head"], capture_output=True, text=True, cwd="/tmp/8defbc86ec4ccb4/antenv" if "antenv" in __file__ else None) # we'll just omit cwd
+        result = subprocess.run(["python", "-m", "alembic", "upgrade", "head"], capture_output=True, text=True)
+        return {"status": "success", "stdout": result.stdout, "stderr": result.stderr}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
