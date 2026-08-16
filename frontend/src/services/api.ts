@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8002/api/v1';
+const BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? 'https://sigera-backend-eudugpfdgafydvh6.centralus-01.azurewebsites.net/api/v1' : 'http://localhost:8000/api/v1');
 
 export interface CalificacionGrupoPayload {
   grupo_competencia_id: number;
