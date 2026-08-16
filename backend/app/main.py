@@ -7,6 +7,8 @@ from app.api.api import api_router
 from sqlalchemy.orm import Session
 from app.db.session import SessionLocal
 
+global_errors = []
+
 app = FastAPI(
     title="SIGERA API",
     description="API del Sistema Inteligente de Gestión Educativa y Rendimiento Académico",
@@ -27,16 +29,12 @@ app.include_router(api_router, prefix="/api/v1")
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
-    with open("error.log", "a", encoding="utf-8") as f:
-        f.write(f"Unhandled Exception: {exc}\n")
-        f.write(traceback.format_exc())
-        f.write("\n")
+    global_errors.append(f"Unhandled Exception: {exc}\n{traceback.format_exc()}")
     return JSONResponse(status_code=500, content={"detail": "Internal Server Error"})
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
-    with open("error.log", "a", encoding="utf-8") as f:
-        f.write(f"Validation Error: {exc}\n")
+    global_errors.append(f"Validation Error: {exc}")
     return JSONResponse(status_code=422, content={"detail": exc.errors()})
 
 @app.get("/")
@@ -49,11 +47,7 @@ def health_check():
 
 @app.get("/logs")
 def get_logs():
-    import os
-    if os.path.exists("error.log"):
-        with open("error.log", "r", encoding="utf-8") as f:
-            return {"logs": f.read()}
-    return {"logs": "No error.log found in " + os.getcwd()}
+    return {"logs": global_errors}
 
 @app.get("/seed")
 def seed_database():
