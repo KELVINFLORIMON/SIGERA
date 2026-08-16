@@ -90,7 +90,7 @@ def seed_db():
         
     asignatura = db.query(Asignatura).first()
     if not asignatura:
-        asignatura = Asignatura(codigo="MAT-02", nombre="Matemática")
+        asignatura = Asignatura(codigo="MAT-02", nombre="Matemática", centro_id=centro.id)
         db.add(asignatura)
         db.flush()
 
