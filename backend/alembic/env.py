@@ -30,7 +30,7 @@ from app.models import *
 config = context.config
 
 # Overwrite the sqlalchemy.url from our .env settings!
-config.set_main_option("sqlalchemy.url", f"postgresql+pg8000://{settings.POSTGRES_USER}:{settings.POSTGRES_PASSWORD}@{settings.POSTGRES_SERVER}:{settings.POSTGRES_PORT}/{settings.POSTGRES_DB}")
+config.set_main_option("sqlalchemy.url", settings.SQLALCHEMY_DATABASE_URI)
 
 # add your model's MetaData object here
 # for 'autogenerate' support
