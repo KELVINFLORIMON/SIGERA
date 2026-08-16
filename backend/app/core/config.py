@@ -17,17 +17,10 @@ class Settings(BaseSettings):
 
     @property
     def SQLALCHEMY_DATABASE_URI(self) -> str:
-        # HARDCODE CORRECT AZURE URL TO PREVENT ENVIRONMENT VARIABLE MISTAKES
-        if os.getenv("WEBSITE_SITE_NAME") == "sigera-backend":
-            return "postgresql://sigera:Asure.kelvin.1995@sigera-db.postgres.database.azure.com:5432/postgres"
-
         if self.DATABASE_URL:
-            url = self.DATABASE_URL
-            if url.startswith("postgres://"):
-                url = url.replace("postgres://", "postgresql://", 1)
-            if "/sigera" in url and "azure" in url:
-                url = url.replace("/sigera", "/postgres", 1)
-            return url
+            if self.DATABASE_URL.startswith("postgres://"):
+                return self.DATABASE_URL.replace("postgres://", "postgresql://", 1)
+            return self.DATABASE_URL
         return f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_SERVER}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
     
     # Security
