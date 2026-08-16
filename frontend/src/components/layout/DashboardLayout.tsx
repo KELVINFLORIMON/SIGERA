@@ -33,12 +33,29 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, titl
     return localStorage.getItem('sidebarCollapsed') === 'true';
   });
   const [isHovered, setIsHovered] = useState(false);
+  const [justClicked, setJustClicked] = useState(false);
 
-  const effectivelyCollapsed = isSidebarCollapsed && !isHovered;
+  // Si acaba de hacer clic, obligamos a que se colapse ignorando el hover actual
+  const effectivelyCollapsed = isSidebarCollapsed && (!isHovered || justClicked);
 
   useEffect(() => {
     localStorage.setItem('sidebarCollapsed', String(isSidebarCollapsed));
   }, [isSidebarCollapsed]);
+
+  const handleToggleSidebar = () => {
+    setIsSidebarCollapsed(!isSidebarCollapsed);
+    setJustClicked(true);
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    setJustClicked(false); // Al volver a entrar o moverse, reactivamos el hover
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setJustClicked(false);
+  };
 
   useEffect(() => {
     if (user?.es_superusuario) {
@@ -68,8 +85,8 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, titl
       {/* Sidebar - Panel lateral izquierdo con efecto de vidrio empañado (Glassmorphism) */}
       <aside 
         className={`dashboard-sidebar glass-panel ${effectivelyCollapsed ? 'collapsed' : ''}`}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         <div className="sidebar-header-row">
           <div className="sidebar-logo">
@@ -78,7 +95,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, titl
           </div>
           <button 
             className="sidebar-toggle-btn"
-            onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+            onClick={handleToggleSidebar}
             title={isSidebarCollapsed ? "Expandir Menú" : "Ocultar Menú"}
           >
             {isSidebarCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
