@@ -1,0 +1,156 @@
+.celda-container {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 8px;
+  padding: 0.4rem;
+  width: 95px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.celda-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: var(--color-primary-light);
+}
+
+.celda-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.icono-estado {
+  font-size: 0.8rem;
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.celda-inputs {
+  display: flex;
+  gap: 0.25rem;
+  align-items: flex-end;
+}
+
+.input-grupo {
+  display: flex;
+  flex-direction: column;
+}
+
+.principal {
+  flex: 1;
+}
+
+.secundario {
+  width: 40px;
+  animation: slideInRight 0.3s ease-out forwards;
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.input-nota {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border-input);
+  color: var(--text-main);
+  border-radius: 6px;
+  padding: 0.3rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.input-nota:focus {
+  border-color: var(--color-primary-light);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+  background: var(--bg-surface);
+}
+
+/* Esconder flechas del input number */
+.input-nota::-webkit-inner-spin-button,
+.input-nota::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.input-nota[type=number] {
+  -moz-appearance: textfield;
+}
+
+.input-rp {
+  font-size: 0.85rem;
+  padding: 0.25rem;
+  border-color: var(--color-warning);
+  background: rgba(245, 158, 11, 0.1);
+}
+
+/* Estados Visuales (Colores Semánticos MINERD) */
+.estado-logrado {
+  border-color: var(--color-success);
+  background: linear-gradient(145deg, var(--bg-surface), var(--color-success-bg));
+}
+.estado-logrado .input-nota:not(.input-rp) {
+  color: var(--color-success);
+}
+
+.estado-reprobado {
+  border-color: var(--color-danger);
+  background: linear-gradient(145deg, var(--bg-surface), var(--color-danger-bg));
+}
+.estado-reprobado .input-nota:not(.input-rp) {
+  color: #ff6b6b;
+}
+
+.estado-en_rp {
+  border-color: var(--color-warning);
+  background: linear-gradient(145deg, var(--bg-surface), var(--color-warning-bg));
+}
+
+/* Tooltip nativo personalizado */
+.tooltip-rp {
+  position: relative;
+}
+.tooltip-rp::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-5px);
+  background: #000;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s;
+  pointer-events: none;
+  z-index: 10;
+}
+.tooltip-rp:hover::before {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-8px);
+}
+
+.celda-container.deshabilitado {
+  opacity: 0.5;
+  pointer-events: none;
+  filter: grayscale(100%);
+}

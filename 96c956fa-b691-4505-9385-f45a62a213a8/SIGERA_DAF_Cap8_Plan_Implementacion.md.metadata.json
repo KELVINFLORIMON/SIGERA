@@ -1,0 +1,5 @@
+{
+  "summary": "Capítulo 8 del DAF de SIGERA - Plan de Implementación completo. Incluye: resumen ejecutivo del proyecto, roadmap de 16 meses con diagrama Gantt ASCII, desglose semanal de la Etapa 1, equipo de desarrollo recomendado con roles y dedicación, estrategia de pruebas (unitarias, integración, UAT, carga), estrategia de despliegue con Docker y rollback, plan de capacitación por rol, plan de migración de datos, matriz de 10 riesgos identificados con mitigación, criterios de éxito, cronograma de inversión estimada, 5 próximos pasos inmediatos e índice completo del DAF con los 8 capítulos.",
+  "updatedAt": "2026-08-06T13:24:26.613156400Z",
+  "userFacing": true
+}

@@ -1,0 +1,174 @@
+.table-container {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-width: 100%;
+  max-height: 65vh; /* Mantiene el scroll siempre visible */
+  border-radius: 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-glass);
+}
+
+/* Tabs */
+.tabs-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--border-subtle);
+  padding-bottom: 0.5rem;
+}
+
+.tab-button {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.tab-button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+}
+
+.tab-button.active {
+  background: var(--color-primary-light);
+  color: white;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+}
+
+.minerd-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: max-content;
+  min-width: 100%;
+}
+
+.minerd-table th,
+.minerd-table td {
+  padding: 0.5rem;
+  border-right: 1px solid var(--border-table);
+  border-bottom: 1px solid var(--border-table);
+  vertical-align: middle;
+}
+
+.minerd-table th {
+  background: var(--bg-table-header-cell);
+  color: var(--text-main);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.minerd-table tbody tr:nth-child(even) td:not(.sticky-col) {
+  background: var(--bg-row-even);
+}
+
+.minerd-table tbody tr:hover td:not(.sticky-col) {
+  background: var(--bg-row-hover);
+}
+
+/* Headers especiales */
+.gc-header {
+  color: var(--color-primary-light);
+  font-size: 0.85rem;
+  background: rgba(2, 132, 199, 0.1) !important;
+}
+
+.pc-header {
+  background: var(--bg-pc-column) !important;
+  color: var(--color-pc-text) !important;
+}
+
+.cf-header {
+  background: rgba(16, 185, 129, 0.1) !important;
+  color: var(--color-success-dark, #065f46);
+  font-size: 0.9rem;
+}
+
+/* Columnas pegajosas (Sticky) */
+.sticky-col {
+  position: sticky;
+  background: var(--bg-surface);
+}
+
+.minerd-table tbody tr:nth-child(even) .sticky-col {
+  background: var(--bg-row-even);
+}
+
+.minerd-table tbody tr:hover .sticky-col {
+  background: var(--bg-row-hover);
+}
+
+.left-col {
+  left: 0;
+  border-right: 2px solid var(--border-subtle);
+  z-index: 2;
+}
+
+.right-col {
+  right: 0;
+  border-left: 2px solid var(--border-subtle);
+  z-index: 2;
+}
+
+.z-top {
+  z-index: 3 !important;
+}
+
+/* Celdas interiores */
+.estudiante-info-table {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-width: 250px;
+}
+
+.period-cell {
+  min-width: 80px;
+}
+
+.pc-cell {
+  background: var(--bg-pc-column);
+  color: var(--color-pc-text);
+  min-width: 60px;
+}
+
+.calificacion-final-table {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 40px;
+}
+
+.cf-valor-table {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.cf-global {
+  min-width: 60px;
+}
+
+.cf-pendiente { color: var(--text-muted); }
+.cf-logrado { color: var(--color-success); font-weight: 800; }
+.cf-insuficiente { color: #ff6b6b; font-weight: 800; }
+
+/* Quitar flechas a los inputs de tipo number */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

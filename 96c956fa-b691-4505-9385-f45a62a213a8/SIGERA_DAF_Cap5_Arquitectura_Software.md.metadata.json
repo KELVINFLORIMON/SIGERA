@@ -1,0 +1,5 @@
+{
+  "summary": "Capítulo 5 del DAF de SIGERA - Arquitectura de Software completa. Incluye: arquitectura general del sistema (capas), estructura del backend con FastAPI/Python (routers, servicios, modelos, esquemas), diseño completo de la API REST con 60+ endpoints organizados por módulo, sistema de autenticación JWT con flujo de tokens, estructura de carpetas del backend y frontend, arquitectura del frontend React/TypeScript con componentes y estado, estrategia de manejo de errores, variables de entorno, configuración Docker y arquitectura de despliegue.",
+  "updatedAt": "2026-08-06T07:25:38.441864300Z",
+  "userFacing": true
+}

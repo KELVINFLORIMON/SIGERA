@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Brochure SIGERA</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Montserrat:wght@800;900&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .brochure {
+      width: 297mm;
+      height: 210mm;
+      background: white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    @media print {
+      body {
+        background-color: white;
+      }
+      .brochure {
+        box-shadow: none;
+        width: 100%;
+        height: 100%;
+      }
+      @page {
+        size: A4 landscape;
+        margin: 0;
+      }
+    }
+
+    .panel {
+      flex: 1;
+      height: 100%;
+      position: relative;
+      box-sizing: border-box;
+      padding: 18mm 15mm;
+      overflow: hidden;
+    }
+
+    /* --------------------------------------
+       PANEL 1: PORTADA (Izquierda)
+       -------------------------------------- */
+    .panel-1 {
+      background-color: #0A1628;
+      color: white;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .panel-1-bg-decor {
+      position: absolute;
+      top: -100px;
+      left: -100px;
+      width: 300px;
+      height: 300px;
+      background: #0057B8;
+      border-radius: 50%;
+      opacity: 0.3;
+      z-index: 0;
+    }
+
+    .panel-1-bg-decor-2 {
+      position: absolute;
+      top: 150px;
+      right: -80px;
+      width: 200px;
+      height: 200px;
+      background: #4FC3F7;
+      border-radius: 50%;
+      opacity: 0.15;
+      z-index: 0;
+    }
+
+    .panel-1-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+    }
+
+    .logo-container {
+      margin-top: 10mm;
+      margin-bottom: 10px;
+    }
+
+    .logo-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 4.5rem;
+      font-weight: 900;
+      color: #FFFFFF;
+      margin: 0;
+      line-height: 1;
+      letter-spacing: 2px;
+    }
+
+    .tagline {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #4FC3F7;
+      margin-top: 15px;
+      margin-bottom: 30px;
+      line-height: 1.4;
+      padding: 0 15px;
+    }
+
+    .hero-image {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 6px solid #0057B8;
+      object-fit: cover;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+      margin-top: 10px;
+    }
+
+    /* Forma curva inferior */
+    .bottom-curve {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 160px;
+      background: white;
+      clip-path: ellipse(150% 100% at 50% 100%);
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 15mm;
+    }
+    
+    .bottom-curve-accent {
+      position: absolute;
+      bottom: 155px;
+      left: 0;
+      width: 100%;
+      height: 15px;
+      background: #4FC3F7;
+      clip-path: ellipse(150% 100% at 50% 100%);
+      z-index: 0;
+    }
+
+    .minerd-compliant {
+      color: #0A1628;
+      font-weight: 800;
+      font-size: 0.95rem;
+      z-index: 3;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .rd-text {
+      color: #0057B8;
+      font-weight: 600;
+      font-size: 0.8rem;
+      margin-top: 5px;
+      z-index: 3;
+    }
+
+    /* --------------------------------------
+       PANEL INTERIOR (Centro y Derecha)
+       -------------------------------------- */
+    .panel-interior {
+      background-color: #F5F8FF;
+      color: #0A1628;
+    }
+
+    .panel-interior::before {
+      content: '';
+      position: absolute;
+      bottom: -150px;
+      right: -150px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(79,195,247,0.15) 0%, rgba(245,248,255,0) 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.8rem;
+      color: #0057B8;
+      margin-top: 0;
+      margin-bottom: 25px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: #4FC3F7;
+      margin-top: 10px;
+    }
+
+    /* --------------------------------------
+       PANEL 2: ¿POR QUÉ SIGERA?
+       -------------------------------------- */
+    .features-list {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      background: white;
+      padding: 12px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+      background: #0A1628;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: white;
+      font-size: 1.4rem;
+      border: 2px solid #0057B8;
+      position: relative;
+    }
+    
+    .feature-icon::after {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border-radius: 50%;
+      border: 1px dashed #4FC3F7;
+    }
+
+    .feature-text h3 {
+      margin: 0 0 6px 0;
+      font-size: 1.05rem;
+      color: #0057B8;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+    }
+
+    .feature-text p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #B0BEC5;
+      color: #4a5568; /* darker for readability */
+      line-height: 1.4;
+    }
+    
+    .decorative-img-1 {
+      position: absolute;
+      right: -20px;
+      top: 20px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      opacity: 0.5;
+      border: 3px solid white;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+
+    /* --------------------------------------
+       PANEL 3: LO QUE SIGERA OFRECE
+       -------------------------------------- */
+    .panel-3-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .roles-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .role-box {
+      background: white;
+      border-left: 5px solid #0057B8;
+      padding: 12px 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+      border-radius: 0 8px 8px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .role-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50px;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(79,195,247,0.1));
+    }
+
+    .role-box h4 {
+      margin: 0 0 8px 0;
+      color: #0A1628;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .role-box h4 i {
+      color: #0057B8;
+    }
+
+    .role-box ul {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 0.85rem;
+      color: #4a5568;
+    }
+
+    .role-box ul li {
+      margin-bottom: 4px;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      margin-top: auto;
+      background: #0A1628;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 10px 20px rgba(0,87,184,0.2);
+    }
+
+    .cta-section h3 {
+      margin: 0 0 15px 0;
+      font-size: 1.3rem;
+      color: #4FC3F7;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .contact-field {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(79,195,247,0.3);
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: #fff;
+      text-align: left;
+    }
+
+    .cta-btn {
+      background: #0057B8;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: background 0.3s;
+    }
+    
+    .cta-btn:hover {
+      background: #4FC3F7;
+      color: #0A1628;
+    }
+  </style>
+</head>
+<body>
+  <div class="brochure">
+    
+    <!-- PANEL 1: PORTADA -->
+    <div class="panel panel-1">
+      <div class="panel-1-bg-decor"></div>
+      <div class="panel-1-bg-decor-2"></div>
+      
+      <div class="panel-1-content">
+        <div class="logo-container">
+          <h1 class="logo-title">SIGERA</h1>
+        </div>
+        
+        <div class="tagline">
+          El registro que ya conoces,<br>en la herramienta que necesitas.
+        </div>
+        
+        <img class="hero-image" src="https://images.unsplash.com/photo-1571260899304-425dea5cf698?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Estudiantes">
+      </div>
+
+      <div class="bottom-curve-accent"></div>
+      <div class="bottom-curve">
+        <div class="minerd-compliant">MINERD Compliant</div>
+        <div class="rd-text"><i class="fa-solid fa-location-dot"></i> República Dominicana</div>
+      </div>
+    </div>
+
+    <!-- PANEL 2: INTERIOR CENTRAL -->
+    <div class="panel panel-interior">
+      <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Data" class="decorative-img-1">
+      
+      <h2 class="section-title">¿Por qué<br>SIGERA?</h2>
+      
+      <div class="features-list">
+        
+        <div class="feature-item">
+          <div class="feature-icon"><i class="fa-solid fa-user-clock"></i></div>
+          <div class="feature-text">
+            <h3>Sobrecarga Docente</h3>
+            <p>Liberamos cientos de horas administrativas para que tus docentes las enfoquen 100% en la enseñanza.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon"><i class="fa-solid fa-calculator"></i></div>
+          <div class="feature-text">
+            <h3>Errores en cálculos</h3>
+            <p>Evaluaciones automáticas sin riesgo de equivocación en completivas, extraordinarias o competencias.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
+          <div class="feature-text">
+            <h3>Falta de información</h3>
+            <p>Indicadores actualizados al instante para la dirección. Adiós a esperar los reportes de fin de mes.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div class="feature-text">
+            <h3>Riesgo académico oculto</h3>
+            <p>Detección y alertas tempranas de estudiantes con bajas calificaciones recurrentes y ausentismo.</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- PANEL 3: INTERIOR DERECHO -->
+    <div class="panel panel-interior">
+      <div class="panel-3-content">
+        <h2 class="section-title">Lo que SIGERA<br>ofrece</h2>
+        
+        <div class="roles-container">
+          
+          <div class="role-box">
+            <h4><i class="fa-solid fa-building-columns"></i> Para la Dirección</h4>
+            <ul>
+              <li>Reportes institucionales en tiempo real.</li>
+              <li>Actas oficiales generadas y certificadas al instante.</li>
+              <li>Visibilidad total del centro educativo.</li>
+            </ul>
+          </div>
+          
+          <div class="role-box">
+            <h4><i class="fa-solid fa-user-tie"></i> Para el Coordinador</h4>
+            <ul>
+              <li>Validación centralizada de registros de grado.</li>
+              <li>Alertas tempranas de estudiantes en riesgo.</li>
+              <li>Monitoreo del desempeño docente.</li>
+            </ul>
+          </div>
+
+          <div class="role-box">
+            <h4><i class="fa-solid fa-chalkboard-user"></i> Para el Docente</h4>
+            <ul>
+              <li>Interfaz idéntica al registro físico habitual.</li>
+              <li>Cálculos matemáticos 100% automatizados.</li>
+              <li>Boletines generados con un solo clic.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="cta-section">
+          <h3>¡Solicita tu demo!</h3>
+          <div class="contact-form">
+            <div class="contact-field"><i class="fa-regular fa-envelope"></i> tu-correo@colegio.edu.do</div>
+            <div class="contact-field"><i class="fa-solid fa-phone"></i> (809) 000-0000</div>
+            <button class="cta-btn">Agendar Demostración</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+{
+  "summary": "Capítulo 4 del DAF de SIGERA - Arquitectura de Datos completa. Incluye: modelo conceptual con entidades e identificación de relaciones, diagrama ERD textual completo, modelo lógico con 28 tablas normalizadas en 3FN con llaves primarias y foráneas, modelo físico en PostgreSQL con CREATE TABLE statements completos, diccionario de datos por tabla, catálogos y valores predefinidos, índices de rendimiento, restricciones de integridad, y estrategia de migración de datos.",
+  "updatedAt": "2026-08-06T07:17:55.296875600Z",
+  "userFacing": true
+}

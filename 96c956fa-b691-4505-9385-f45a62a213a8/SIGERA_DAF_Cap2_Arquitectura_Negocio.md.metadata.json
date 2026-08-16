@@ -1,0 +1,5 @@
+{
+  "summary": "Capítulo 2 del Documento de Arquitectura Funcional (DAF) de SIGERA. Cubre la Arquitectura del Negocio completa: mapa de macroprocesos académicos, flujos detallados por actor (docente, coordinador, director, administrador), diagramas de procesos en formato texto (BPMN-style), reglas de negocio derivadas de la Ordenanza 04-2023, flujo completo de evaluación por período, flujo de recuperación pedagógica, completiva y extraordinaria, cierre del año escolar, casos de excepción, y tabla completa de validaciones del sistema.",
+  "updatedAt": "2026-08-06T07:05:03.802430400Z",
+  "userFacing": true
+}

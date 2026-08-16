@@ -1,0 +1,73 @@
+import enum
+
+class TandaTipo(str, enum.Enum):
+    MATUTINA = "MATUTINA"
+    VESPERTINA = "VESPERTINA"
+    NOCTURNA = "NOCTURNA"
+    SABATINA = "SABATINA"
+    JEE = "JEE"
+
+class ModalidadTipo(str, enum.Enum):
+    ACADEMICA = "ACADEMICA"
+    CIENCIAS_Y_HUMANIDADES = "CIENCIAS_Y_HUMANIDADES"
+    TECNICO_PROFESIONAL = "TECNICO_PROFESIONAL"
+    ARTE = "ARTE"
+    ADULTOS = "ADULTOS"
+
+class CondicionInicialTipo(str, enum.Enum):
+    PROMOVIDO = "PROMOVIDO"
+    REPITENTE = "REPITENTE"
+    REINGRESO = "REINGRESO"
+    APLAZADO = "APLAZADO"
+    NUEVO_INGRESO = "NUEVO_INGRESO"
+
+class EstadoEstudianteTipo(str, enum.Enum):
+    ACTIVO = "ACTIVO"
+    RETIRADO = "RETIRADO"
+    TRANSFERIDO = "TRANSFERIDO"
+    FALLECIDO = "FALLECIDO"
+
+class EstadoPeriodoTipo(str, enum.Enum):
+    PENDIENTE = "PENDIENTE"
+    ACTIVO = "ACTIVO"
+    CERRADO = "CERRADO"
+
+class EstadoAnioTipo(str, enum.Enum):
+    CONFIGURACION = "CONFIGURACION"
+    ACTIVO = "ACTIVO"
+    CERRADO = "CERRADO"
+    HISTORICO = "HISTORICO"
+
+class SituacionFinalTipo(str, enum.Enum):
+    APROBADO = "APROBADO"
+    EN_COMPLETIVA = "EN_COMPLETIVA"
+    EN_EXTRAORDINARIA = "EN_EXTRAORDINARIA"
+    EVALUACION_ESPECIAL = "EVALUACION_ESPECIAL"
+    PROMOVIDO_CON_CONDICION = "PROMOVIDO_CON_CONDICION"
+    REPROBADO = "REPROBADO"
+    PENDIENTE = "PENDIENTE"
+    RETIRADO = "RETIRADO"
+    TRANSFERIDO = "TRANSFERIDO"
+
+class NivelDesempenoTipo(str, enum.Enum):
+    DESTACADO = "DESTACADO"
+    LOGRADO = "LOGRADO"
+    EN_PROCESO = "EN_PROCESO"
+    INSUFICIENTE = "INSUFICIENTE"
+    SIN_EVALUAR = "SIN_EVALUAR"
+
+class SexoTipo(str, enum.Enum):
+    M = "M"
+    F = "F"
+
+class TipoRepresentanteTipo(str, enum.Enum):
+    PADRE = "PADRE"
+    MADRE = "MADRE"
+    TUTOR = "TUTOR"
+    OTRO = "OTRO"
+
+class RolNombreTipo(str, enum.Enum):
+    ADMINISTRADOR = "ADMINISTRADOR"
+    DOCENTE = "DOCENTE"
+    COORDINADOR = "COORDINADOR"
+    DIRECTOR = "DIRECTOR"

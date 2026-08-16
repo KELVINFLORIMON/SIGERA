@@ -1,0 +1,5 @@
+{
+  "summary": "Capítulo 6 del DAF de SIGERA - Reportes y Power BI. Incluye: catálogo completo de 20 reportes académicos con especificaciones técnicas, estructura del dataset de exportación para Power BI (7 tablas planas con campos completos), diseño de los dashboards por rol (Director, Coordinador, Docente), KPIs académicos con fórmulas DAX, modelo de datos estrella para Power BI, estrategia de actualización y conexión al API, y especificaciones de reportes en PDF/Excel.",
+  "updatedAt": "2026-08-06T07:34:24.267099Z",
+  "userFacing": true
+}

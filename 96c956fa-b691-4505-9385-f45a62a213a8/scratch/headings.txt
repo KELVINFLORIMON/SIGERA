@@ -1,0 +1,538 @@
+
+--- Manual_Usuario_SIGERA.md ---
+Manual de Usuario - SIGERA
+  Índice
+  1. Introducción
+  2. Acceso al Sistema
+  3. Perfiles de Usuario
+  4. Manual para Administrador
+    4.1 Configuración Institucional
+    4.2 Gestión de Estudiantes y Docentes
+    4.3 Asignación de Carga Académica
+  5. Manual para Docente
+    5.1 Registro de Calificaciones por Período
+    5.2 Recuperación Pedagógica
+    5.3 Evaluaciones Completivas y Extraordinarias
+    5.4 Generación de Boletines
+  6. Manual para Coordinador Académico
+    6.1 Validación de Calificaciones
+    6.2 Alertas de Rendimiento
+  7. Manual para Director
+    7.1 Visualización de Dashboards
+    7.2 Certificación de Documentos
+  8. Resolución de Problemas Frecuentes
+
+--- Presentacion_SIGERA.md ---
+SIGERA
+  1. ¿Qué es SIGERA?
+  2. La Problemática Actual
+  3. La Solución: ¿Qué Ofrece SIGERA?
+    Para el Centro Educativo y Dirección
+    Para el Coordinador Académico
+    Para el Docente
+  4. Características Principales
+  5. ¿Por qué elegir SIGERA?
+
+--- SIGERA_Analisis_Legal.md ---
+Informe Técnico Legal — SIGERA
+  Análisis de la Base Legal del Sistema Educativo Dominicano
+    Modalidad Académica — Nivel Secundario
+  SECCIÓN A: ESCALA DE CALIFICACIONES
+  SECCIÓN B: ESTRUCTURA DE PERÍODOS EVALUATIVOS
+  SECCIÓN C: RECUPERACIÓN PEDAGÓGICA — REGLAS EXACTAS
+  SECCIÓN D: EVALUACIÓN COMPLETIVA — REGLAS EXACTAS
+  SECCIÓN E: EVALUACIÓN EXTRAORDINARIA — REGLAS EXACTAS
+  SECCIÓN F: CRITERIOS DE PROMOCIÓN
+  SECCIÓN G: ASIGNATURAS POR GRADO — MODALIDAD ACADÉMICA
+    Primer Ciclo (1ro, 2do, 3er grado)
+    Segundo Ciclo (4to, 5to, 6to grado)
+  SECCIÓN H: COMPETENCIAS ESPECÍFICAS POR ASIGNATURA
+  SECCIÓN I: ESTRUCTURA DEL REGISTRO DE GRADO OFICIAL
+  SECCIÓN J: ESTRUCTURA DEL BOLETÍN OFICIAL
+    Encabezado:
+    Cuerpo — Notas mostradas por asignatura:
+    Lo que NO muestra el boletín:
+  SECCIÓN K: CALENDARIO ESCOLAR 2025-2026
+    Días de asueto relevantes:
+  SECCIÓN L: DISCREPANCIAS CON EL DAF DE SIGERA
+  SECCIÓN M: RECOMENDACIONES DE AJUSTE POR CAPÍTULO
+    Capítulo 2 — Arquitectura del Negocio
+    Capítulo 3 — Arquitectura Funcional
+    Capítulo 4 — Arquitectura de Datos
+    Capítulo 5 — Arquitectura de Software
+    Capítulo 6 — Reportes y Power BI
+    Capítulos 7 y 8
+
+--- SIGERA_DAF_Cap1_Vision_General.md ---
+SIGERA
+  Sistema Inteligente de Gestión Educativa y Rendimiento Académico
+    Documento de Arquitectura Funcional (DAF)
+      Capítulo 1 — Visión General del Proyecto
+  Tabla de Contenidos
+  1. Presentación del Proyecto
+    1.1 Introducción
+    1.2 Nombre del Sistema
+    1.3 Contexto del proyecto
+  2. Problemática Identificada
+    2.1 Situación actual
+    2.2 Problemas específicos identificados en el Registro de Grado
+    2.3 Oportunidad de mejora
+  3. Visión del Sistema
+    3.1 Visión a corto plazo (Etapa 1 — Año 1)
+    3.2 Visión a mediano plazo (Etapa 2-4 — Años 1-2)
+    3.3 Visión a largo plazo (Etapa 5-6 — Años 2-3)
+    3.4 Declaración de visión
+  4. Objetivos del Proyecto
+    4.1 Objetivo general
+    4.2 Objetivos específicos
+  5. Alcance del Sistema
+    5.1 Lo que SÍ incluye SIGERA (Etapa 1)
+    5.2 Lo que NO incluye SIGERA en la Etapa 1
+    5.3 Nivel educativo cubierto
+  6. Beneficios Esperados
+    6.1 Para el docente
+    6.2 Para la dirección y coordinación
+    6.3 Para el estudiante y sus representantes
+    6.4 Para el centro educativo
+  7. Marco Normativo
+    7.1 Leyes nacionales
+    7.2 Ordenanzas del MINERD
+    7.3 Documentos oficiales MINERD
+    7.4 Implicaciones normativas para el diseño del sistema
+  8. Estructura Académica del Sistema Educativo Dominicano
+    8.1 Estructura de niveles y grados
+    8.2 Modalidades del nivel secundario cubiertas
+    8.3 Estructura de períodos
+    8.4 Escala de calificaciones (Ordenanza 04-2023, Art. 47)
+    8.5 Asignaturas del nivel secundario
+  9. Actores del Sistema
+    9.1 Administrador del sistema
+    9.2 Docente
+    9.3 Coordinador académico
+    9.4 Director
+    9.5 Matriz de acceso por rol
+  10. Módulos del Sistema
+    Etapa 1 — Núcleo del sistema (Alta prioridad)
+    Etapa 2 — Asistencia y analítica
+    Etapa 3 — Experiencia extendida
+    Etapas 4-6 — Inteligencia y predicción
+  11. Fases de Desarrollo
+    Fase 1 — Etapa 1: Registro y Calificaciones (Prioridad máxima)
+    Fase 2 — Etapa 2: Asistencia y Analítica
+    Fase 3 — Etapa 3: Experiencia extendida
+    Fase 4 — Etapas 5-6: Inteligencia Artificial
+  12. Identidad del Producto
+    12.1 Nombre
+    12.2 Propuesta de valores del producto
+    12.3 Slogan propuesto
+    12.4 Stack tecnológico recomendado
+      ¿Por qué este stack y no otros?
+  13. Glosario de Términos
+  14. Referencias Normativas
+  Historial de Versiones
+
+--- SIGERA_DAF_Cap2_Arquitectura_Negocio.md ---
+SIGERA
+  Sistema Inteligente de Gestión Educativa y Rendimiento Académico
+    Documento de Arquitectura Funcional (DAF)
+      Capítulo 2 — Arquitectura del Negocio
+  Tabla de Contenidos
+  1. Introducción
+  2. Mapa de Macroprocesos Académicos
+  3. Proceso 1 — Configuración del Año Escolar
+    3.1 Descripción
+    3.2 Flujo detallado
+    3.3 Datos generados
+    3.4 Condición para avanzar al Proceso 2
+  4. Proceso 2 — Registro y Organización de Estudiantes
+    4.1 Descripción
+    4.2 Flujo detallado
+    4.3 Estados del estudiante
+    4.4 Regla de negocio — Número de orden
+  5. Proceso 3 — Asignación Académica de Docentes
+    5.1 Descripción
+    5.2 Flujo detallado
+    5.3 Regla de negocio — Conflicto de asignación
+  6. Proceso 4 — Evaluación por Período
+    6.1 Descripción
+    6.2 Flujo detallado
+    6.3 Estructura de competencias por asignatura
+    6.4 Fórmula de cálculo del período
+  7. Proceso 5 — Recuperación Pedagógica
+    7.1 Descripción
+    7.2 Principio fundamental (Ordenanza 04-2023)
+    7.3 Flujo detallado
+    7.4 Regla de uso de la nota de recuperación
+  8. Proceso 6 — Cierre de Período
+    8.1 Descripción
+    8.2 Flujo detallado
+    8.3 Regla de negocio — Edición post-cierre
+  9. Proceso 7 — Evaluación Completiva
+    9.1 Descripción
+    9.2 ¿Quiénes van a completiva?
+    9.3 Flujo de la completiva
+  10. Proceso 8 — Evaluación Extraordinaria
+    10.1 Descripción
+    10.2 Flujo de la extraordinaria
+  11. Proceso 9 — Cierre del Año Escolar y Promoción
+    11.1 Descripción
+    11.2 Flujo de cierre y promoción
+    11.3 Reglas de promoción
+  12. Proceso 10 — Generación de Boletines
+    12.1 Descripción
+    12.2 Tipos de boletines
+    12.3 Contenido del boletín (formato MINERD)
+    12.4 Flujo de generación de boletines
+  13. Flujos por Actor
+    13.1 Flujo completo del Administrador
+    13.2 Flujo completo del Docente
+    13.3 Flujo completo del Coordinador Académico
+    13.4 Flujo completo del Director
+  14. Reglas de Negocio
+    14.1 Reglas de calificación
+    14.2 Reglas de recuperación pedagógica
+    14.3 Reglas de asistencia *(Preparadas para Etapa 2)*
+    14.4 Reglas de cierre y auditoría
+  15. Validaciones del Sistema
+    15.1 Validaciones de entrada de datos
+    15.2 Validaciones de proceso
+    15.3 Alertas automáticas del sistema
+  16. Casos de Excepción
+    16.1 Estudiante se retira durante el año escolar
+    16.2 Estudiante se transfiere a otro centro
+    16.3 Estudiante llega de otro centro (nuevo ingreso tardío)
+    16.4 Corrección de calificación después del cierre
+    16.5 Docente sin asignaciones o con asignaciones incorrectas
+  17. Decisiones Automáticas vs. Manuales
+    17.1 Decisiones 100% automáticas (sin intervención humana)
+    17.2 Decisiones que requieren intervención humana
+  Resumen del Capítulo 2
+  Historial de Versiones
+
+--- SIGERA_DAF_Cap3_Arquitectura_Funcional.md ---
+SIGERA
+  Sistema Inteligente de Gestión Educativa y Rendimiento Académico
+    Documento de Arquitectura Funcional (DAF)
+      Capítulo 3 — Arquitectura Funcional
+  Tabla de Contenidos
+  1. Introducción
+  2. Casos de Uso del Sistema
+    2.1 Diagrama general de casos de uso
+    2.2 Casos de uso detallados
+      UC-01 — Configurar año escolar
+      UC-02 — Gestionar estudiantes
+      UC-06 — Registrar calificaciones
+      UC-07 — Registrar recuperación pedagógica
+      UC-10 — Generar boletines
+      UC-13 — Cerrar período
+  3. Historias de Usuario
+    3.1 Historias del Docente
+    3.2 Historias del Coordinador Académico
+    3.3 Historias del Director
+    3.4 Historias del Administrador
+  4. Motor de Cálculo Académico
+    4.1 Datos de entrada del motor
+    4.2 Paso 1 — Calificación efectiva por período
+    4.3 Paso 2 — Calificación Final del área (CF)
+    4.4 Paso 3 — Determinación de estudiantes en completiva
+    4.5 Paso 4 — Cálculo de la Calificación Completiva
+    4.6 Paso 5 — Cálculo de la Calificación Extraordinaria
+    4.7 Paso 6 — Determinación de la situación final del estudiante
+    4.8 Tabla de escalas y niveles de desempeño
+    4.9 Resumen visual del motor de cálculo
+  5. Diseño de Pantallas
+    5.1 Principios de diseño de la interfaz
+    Pantalla 1 — Login
+    Pantalla 2 — Dashboard Principal (según rol)
+      Dashboard del Docente:
+      Dashboard del Director:
+    Pantalla 3 — Registro de Calificaciones (pantalla principal del docente)
+    Pantalla 4 — Vista del Registro Completo (por asignatura, año completo)
+    Pantalla 5 — Estudiante: Perfil Completo
+    Pantalla 6 — Cierre de Período (Coordinador)
+    Pantalla 7 — Generación de Boletín
+    Pantalla 8 — Reportes Académicos
+    Pantalla 9 — Gestión de Estudiantes
+    Pantalla 10 — Formulario de Registro de Estudiante
+    Pantalla 11 — Lista de Completiva/Extraordinaria
+    Pantalla 12 — Log de Auditoría
+  6. Flujo de Navegación del Sistema
+  7. Especificaciones de Componentes Clave
+    7.1 Componente: Tabla de Calificaciones
+    7.2 Componente: Boletín PDF
+    7.3 Componente: Sistema de Alertas
+  8. Requisitos No Funcionales
+    8.1 Rendimiento
+    8.2 Disponibilidad
+    8.3 Seguridad
+    8.4 Usabilidad
+    8.5 Datos y exportación
+  Resumen del Capítulo 3
+  Historial de Versiones
+
+--- SIGERA_DAF_Cap4_Arquitectura_Datos.md ---
+SIGERA
+  Sistema Inteligente de Gestión Educativa y Rendimiento Académico
+    Documento de Arquitectura Funcional (DAF)
+      Capítulo 4 — Arquitectura de Datos
+  Tabla de Contenidos
+  1. Introducción
+    1.1 Principios de diseño de la base de datos
+    1.2 Motor de base de datos
+    1.3 Convenciones de nomenclatura
+  2. Modelo Conceptual
+    2.1 Entidades principales
+    2.2 Relaciones conceptuales clave
+  3. Diagrama Entidad-Relación
+  4. Modelo Lógico — Descripción de tablas
+    Grupo 1 — Institucional (4 tablas)
+    Grupo 2 — Organización Académica (5 tablas)
+    Grupo 3 — Personas (5 tablas)
+    Grupo 4 — Competencias (2 tablas)
+    Grupo 5 — Evaluación (6 tablas)
+    Grupo 6 — Seguridad y Auditoría (6 tablas)
+  5. Modelo Físico — SQL PostgreSQL
+    5.1 Tipos ENUM personalizados
+    5.2 Grupo 1 — Tablas Institucionales
+    5.3 Grupo 2 — Organización Académica
+    5.4 Grupo 3 — Personas
+    5.5 Grupo 4 — Competencias
+    5.6 Grupo 5 — Evaluación (tablas centrales)
+    5.7 Grupo 6 — Seguridad y Auditoría
+    5.8 Actualizaciones de llaves foráneas diferidas
+  6. Diccionario de Datos
+    6.1 Tabla: `calificacion_periodo` (tabla central)
+    6.2 Tabla: `estudiante`
+    6.3 Tabla: `estudiante_seccion`
+  7. Catálogos y Valores Predefinidos
+    7.1 Catálogo de asignaturas
+    7.2 Catálogo de roles
+    7.3 Catálogo de competencias — Matemática (ejemplo)
+    7.4 Grupos de competencias — Matemática (ejemplo)
+  8. Índices de Rendimiento
+  9. Restricciones de Integridad
+    9.1 Restricciones de negocio implementadas en la base de datos
+    9.2 Triggers de auditoría automática
+  10. Estrategia de Migración e Importación
+    10.1 Importación de estudiantes desde Excel
+    10.2 Proceso de importación
+    10.3 Secuencia de carga inicial recomendada
+  Resumen del Capítulo 4
+    Mapa de dependencias de tablas
+  Historial de Versiones
+
+--- SIGERA_DAF_Cap5_Arquitectura_Software.md ---
+SIGERA
+  Sistema Inteligente de Gestión Educativa y Rendimiento Académico
+    Documento de Arquitectura Funcional (DAF)
+      Capítulo 5 — Arquitectura de Software
+  Tabla de Contenidos
+  1. Introducción
+    1.1 Stack tecnológico definitivo
+  2. Arquitectura General del Sistema
+    2.1 Diagrama de capas
+    2.2 Principios de arquitectura
+  3. Arquitectura del Backend
+    3.1 Patrón de capas del backend
+    3.2 Estructura del proyecto backend
+    3.3 Ejemplo de implementación — Motor de cálculo
+app/engine/calculo_notas.py
+  4. API REST — Diseño de Endpoints
+    4.1 Autenticación
+    4.2 Configuración Institucional
+    4.3 Grados y Secciones
+    4.4 Asignaturas y Competencias
+    4.5 Estudiantes
+    4.6 Docentes y Asignaciones
+    4.7 Calificaciones (endpoints más críticos)
+    4.8 Boletines
+    4.9 Reportes
+    4.10 Usuarios y Seguridad
+  5. Sistema de Autenticación y Autorización
+    5.1 Flujo de autenticación JWT
+    5.2 Estructura del JWT payload
+    5.3 Sistema de autorización por rol (RBAC)
+app/core/security.py
+Uso en un router:
+    5.4 Validación de acceso a recursos propios del docente
+Los docentes solo pueden ver/editar sus propias asignaciones
+  6. Arquitectura del Frontend
+    6.1 Estructura de carpetas del frontend
+    6.2 Gestión de estado con Zustand
+    6.3 Componente CeldaCalificacion — El más crítico
+  7. Comunicación Frontend ↔ Backend
+    7.1 Configuración de Axios con interceptores JWT
+    7.2 Formato estándar de respuestas del API
+  8. Generación de PDFs
+    8.1 Flujo de generación de boletines
+    8.2 Plantilla HTML del boletín
+  9. Manejo de Errores
+    9.1 Códigos de error personalizados de SIGERA
+    9.2 Handler global de excepciones (FastAPI)
+app/core/exceptions.py
+  10. Variables de Entorno y Configuración
+    10.1 Backend — `.env.example`
+══════════════════════════════════════
+SIGERA API — Variables de entorno
+══════════════════════════════════════
+Base de datos
+JWT
+Aplicación
+Archivos
+Correo (para reset de contraseñas)
+Entorno
+    10.2 Frontend — `.env.example`
+══════════════════════════════════════
+SIGERA Web — Variables de entorno
+══════════════════════════════════════
+  11. Arquitectura de Despliegue
+    11.1 Docker Compose
+docker-compose.yml
+    11.2 Diagrama de despliegue
+    11.3 Requisitos mínimos del servidor
+  12. Estructura de Carpetas del Proyecto (Raíz)
+  Resumen del Capítulo 5
+  Historial de Versiones
+
+--- SIGERA_DAF_Cap6_Reportes_PowerBI.md ---
+SIGERA
+  Sistema Inteligente de Gestión Educativa y Rendimiento Académico
+    Documento de Arquitectura Funcional (DAF)
+      Capítulo 6 — Reportes y Power BI
+  Tabla de Contenidos
+  1. Introducción
+    1.1 Principio de diseño de reportes
+  2. Catálogo de Reportes del Sistema
+    2.1 Reportes Académicos Operativos
+    2.2 Reportes de Rendimiento Institucional
+    2.3 Reportes Estadísticos
+    2.4 Reportes para Power BI
+  3. Reportes Integrados en SIGERA (PDF y Excel)
+    3.1 R-02 — Registro de Grado Completo (PDF oficial)
+    3.2 R-06 — Acta de Rendimiento
+    3.3 R-12 — Reporte de Riesgo Académico (Excel)
+    3.4 R-13b — Reporte de Evaluaciones Especiales
+  4. Dataset de Exportación para Power BI
+    4.1 Archivo 1: `dim_estudiantes.csv`
+    4.2 Archivo 2: `fact_calificaciones.csv`
+    4.3 Archivo 3: `fact_calificaciones_por_periodo.csv`
+    4.4 Archivo 4: `dim_asignaturas.csv`
+    4.5 Archivo 5: `dim_docentes.csv`
+    4.6 Archivo 6: `dim_secciones.csv`
+    4.7 Archivo 7: `resumen_anual.csv`
+  5. Modelo de Datos Estrella para Power BI
+    5.1 Relaciones del modelo
+  6. KPIs Académicos y Fórmulas DAX
+    6.1 KPIs de rendimiento
+    6.2 Medidas de distribución por nivel de desempeño y pruebas
+  7. Diseño de Dashboards por Rol
+    7.1 Dashboard del Director — Vista Ejecutiva
+    7.2 Dashboard del Coordinador — Vista Operativa
+    7.3 Dashboard del Docente — Vista Personal
+    7.4 Vista de Competencias Críticas
+  8. Estrategia de Conexión Power BI ↔ SIGERA
+    8.1 Opciones de conexión
+    8.2 Opción B — Script de exportación programada
+scripts/exportar_power_bi.py
+Se ejecuta diariamente a las 2:00 AM (via cron job o Windows Task Scheduler)
+    8.3 Configuración de Power BI Desktop
+    8.4 Endpoint de exportación en el backend
+app/routers/reportes.py
+  9. Especificaciones Técnicas de los Reportes
+    9.1 Vistas materializadas en PostgreSQL
+    9.2 Tiempos de respuesta esperados por reporte
+    9.3 Permisos de acceso a reportes
+  Resumen del Capítulo 6
+  Historial de Versiones
+
+--- SIGERA_DAF_Cap7_Inteligencia_Artificial.md ---
+Capítulo 7: Inteligencia Artificial en SIGERA
+  7.1 Introducción y Visión de la Inteligencia Artificial (IA) en SIGERA
+  7.2 Casos de Uso de Inteligencia Artificial
+    7.2.1 Predicción de Riesgo de Reprobación (Por Estudiante y Por Asignatura)
+    7.2.2 Predicción de Riesgo de Abandono Escolar (Deserción)
+    7.2.3 Alertas Tempranas Automáticas
+    7.2.4 Detección de Asignaturas y Competencias Críticas
+    7.2.5 Análisis de Rendimiento por Docente (Sin Sesgo Evaluativo)
+    7.2.6 Recomendaciones Pedagógicas Personalizadas
+    7.2.7 Análisis de Tendencias Históricas Multi-Año
+  7.3 Arquitectura del Módulo de Inteligencia Artificial
+    7.3.1 Stack Tecnológico
+    7.3.2 Flujo Arquitectónico General
+    7.3.3 Separación Clara del Core del Sistema
+  7.4 Features (Variables Predictoras) para el Modelo de Riesgo de Reprobación
+    7.4.1 Variables Académicas (El núcleo del modelo)
+    7.4.2 Variables de Recuperación (Indicadores de esfuerzo y resiliencia)
+    7.4.3 Variables Demográficas y de Perfil Estudiantil (Contexto del alumno)
+    7.4.4 Variables de Asistencia (La dimensión conductual, provenientes de la Etapa 2)
+    7.4.5 Variables Contextuales (El entorno pedagógico)
+  7.5 Modelos de Machine Learning a Evaluar
+    7.5.1 Regresión Logística (El Baseline Interpretable)
+    7.5.2 Random Forest (El Modelo Principal y Candidato Fuerte)
+    7.5.3 Gradient Boosting (XGBoost / LightGBM) (El Campeón del Rendimiento)
+    7.5.4 Tabla Comparativa Teórica de Evaluación de Modelos
+  7.6 Flujo Técnico del Pipeline de IA
+    7.6.1 Extracción de Datos Históricos (PostgreSQL)
+    7.6.2 Preprocesamiento y Feature Engineering (Pandas)
+    7.6.3 Entrenamiento y Validación (Scikit-Learn)
+    7.6.4 Serialización (Joblib)
+    7.6.5 Servicio de Predicción (Inferencia) como Endpoint FastAPI
+    7.6.6 Actualización Mensual (Reentrenamiento Continuo)
+    7.6.7 Pseudocódigo Python del Pipeline de Predicción (Microservicio FastAPI)
+Pseudocódigo del endpoint de inferencia - IA SIGERA
+Inicializar la aplicación API
+Cargar el modelo pre-entrenado al iniciar el servidor (evita cargarlo en cada petición)
+Definir el esquema de datos esperado usando Pydantic (Validación automática)
+Ejemplo de ejecución del servidor (si se corre localmente):
+uvicorn main:app --host 0.0.0.0 --port 8000
+  7.7 Sistema de Alertas Inteligentes (Integración con el Dashboard)
+    7.7.1 Arquitectura Visual de Riesgo (Sistema de Semáforo)
+    7.7.2 Gatillos (Triggers) Temporales de Alerta
+    7.7.3 Diagrama Conceptual del Flujo de Alertas
+  7.8 Modelo de Recomendaciones Pedagógicas (IA Prescriptiva)
+    7.8.1 Enfoque Basado en Competencias
+    7.8.2 Mecánica de las Recomendaciones
+    7.8.3 Soberanía del Docente
+  7.9 Consideraciones Éticas, Sesgo y Privacidad (IA Responsable)
+    7.9.1 Prohibición Estricta de Uso Punitivo o Evaluativo Laboral
+    7.9.2 Transparencia y Explicabilidad (XAI)
+    7.9.3 Mitigación de Sesgos Algorítmicos
+    7.9.4 Privacidad de Datos y Cumplimiento Normativo
+  7.10 Indicadores Clave de Éxito del Módulo de IA (KPIs)
+    7.10.1 Métricas Técnicas del Modelo (Data Science Metrics)
+    7.10.2 Métricas de Impacto Educativo (Business Metrics)
+  7.11 Plan de Implementación y Despliegue Gradual (Roadmap Estratégico)
+    Fase 1: Acumulación de Datos (El Silencio Estratégico) - Año 1
+    Fase 2: Shadow Mode y Validación Técnica (Entrenamiento Pasivo) - Inicios Año 2
+    Fase 3: Piloto Activo y Adopción Cultural (Validación con Usuarios Clave) - Mediados Año 2
+    Fase 4: Despliegue General y Expansión Funcional (Producción Plena) - Año 3 en adelante
+
+--- SIGERA_DAF_Cap8_Plan_Implementacion.md ---
+SIGERA
+  Sistema Inteligente de Gestión Educativa y Rendimiento Académico
+    Documento de Arquitectura Funcional (DAF)
+      Capítulo 8 — Plan de Implementación
+  1. Introducción y Enfoque del Plan de Implementación
+  2. Resumen Ejecutivo del Proyecto
+  3. Roadmap Completo del Proyecto (Todas las Etapas)
+    Diagrama de Gantt (ASCII)
+  4. Desglose Detallado de la Etapa 1 (Meses 1-4)
+  5. Equipo de Desarrollo Recomendado
+  6. Estrategia de Pruebas
+  7. Estrategia de Despliegue
+  8. Plan de Capacitación
+  9. Plan de Migración de Datos
+  10. Gestión de Riesgos
+  11. Criterios de Éxito del Proyecto
+  12. Cronograma de Inversión Estimada
+  13. Próximos Pasos Inmediatos (Acción Semanal)
+  14. Índice Completo del DAF — SIGERA
+
+--- implementation_plan.md ---
+Plan de Implementación Técnica - Inicialización de SIGERA
+  User Review Required
+  Open Questions
+  Proposed Changes
+    Backend (Python + FastAPI)
+    Frontend (React + Vite)
+  Verification Plan

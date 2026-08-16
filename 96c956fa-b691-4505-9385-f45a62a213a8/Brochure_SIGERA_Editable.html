@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Brochure SIGERA Editable - Tema Geométrico</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800;900&display=swap');
+
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+    }
+
+    [contenteditable="true"] {
+      outline: none;
+      transition: background 0.3s;
+    }
+    
+    [contenteditable="true"]:hover {
+      background: rgba(15, 43, 70, 0.1);
+      box-shadow: 0 0 0 2px rgba(0, 162, 211, 0.5);
+      border-radius: 4px;
+      cursor: text;
+    }
+
+    .page-container {
+      width: 297mm;
+      height: 210mm;
+      background: white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    @media print {
+      body {
+        background-color: white;
+        padding: 0;
+        gap: 0;
+      }
+      .page-container {
+        box-shadow: none;
+        width: 100%;
+        height: 100%;
+        page-break-after: always;
+      }
+      .editor-toolbar {
+        display: none !important;
+      }
+      [contenteditable="true"]:hover {
+        background: none;
+        box-shadow: none;
+      }
+      @page {
+        size: A4 landscape;
+        margin: 0;
+      }
+    }
+
+    .panel {
+      flex: 1;
+      height: 100%;
+      position: relative;
+      box-sizing: border-box;
+      padding: 15mm;
+      overflow: hidden;
+    }
+    
+    /* --------------------------------------
+       COLORES Y TIPOGRAFÍAS DEL TEMA
+       -------------------------------------- */
+    :root {
+      --dark-blue: #0A1E3F;
+      --cyan: #009BD6;
+      --text-gray: #6B7280;
+      --light-gray: #F3F4F6;
+    }
+
+    .title-main {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--cyan);
+      line-height: 1.1;
+      margin: 0;
+      text-transform: uppercase;
+    }
+    .title-sub {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--dark-blue);
+      font-size: 2.5rem;
+      margin: 0 0 15px 0;
+      line-height: 1;
+    }
+    
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--cyan);
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0 0 15px 0;
+    }
+    
+    .text-sm {
+      font-size: 0.75rem;
+      color: var(--text-gray);
+      line-height: 1.5;
+    }
+
+    /* --------------------------------------
+       PÁGINA 1: EXTERIOR
+       -------------------------------------- */
+       
+    /* Panel Flap (Izquierda) */
+    .panel-flap {
+      background: white;
+      border-right: 1px solid #eee;
+    }
+    .flap-list {
+      padding-left: 15px;
+      margin-top: 15px;
+    }
+    .flap-list li {
+      font-size: 0.75rem;
+      color: var(--text-gray);
+      margin-bottom: 8px;
+    }
+    .stats-chart {
+      margin-top: 30px;
+      width: 100%;
+      height: auto;
+    }
+
+    /* Panel Back Cover (Centro) */
+    .panel-backcover {
+      background: white;
+      border-right: 1px solid #eee;
+      padding: 0;
+    }
+    .backcover-top {
+      height: 55%;
+      background: var(--dark-blue);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 80%);
+      padding: 15mm;
+      color: white;
+    }
+    .backcover-top h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      line-height: 1.3;
+      margin: 30px 0 0 0;
+      text-transform: uppercase;
+    }
+    
+    .contact-info {
+      padding: 15mm;
+    }
+    .contact-item {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .contact-icon {
+      color: var(--cyan);
+      font-size: 1.2rem;
+    }
+    .contact-text {
+      font-size: 0.75rem;
+      color: var(--text-gray);
+      line-height: 1.4;
+    }
+    .contact-text strong { color: var(--dark-blue); font-size: 0.85rem;}
+
+    /* Panel Cover (Derecha) */
+    .panel-cover {
+      background: white;
+      padding: 0;
+      position: relative;
+    }
+    .cover-top-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 60%;
+      background: var(--dark-blue);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 65%);
+    }
+    
+    .cover-img-wrapper {
+      position: absolute;
+      top: 0; left: 10%; width: 80%; height: 60%;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      background: #eee;
+      z-index: 2;
+    }
+    .cover-img-wrapper img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    
+    .cover-triangle-accent-1 {
+      position: absolute;
+      top: 40%; left: 15%; width: 80px; height: 80px;
+      background: var(--dark-blue);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      z-index: 3;
+      display: flex;
+      justify-content: center;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      padding-top: 10px;
+    }
+    
+    .cover-triangle-accent-2 {
+      position: absolute;
+      top: 10%; right: 5%; width: 50px; height: 50px;
+      background: var(--cyan);
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+      z-index: 3;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding-bottom: 5px;
+      color: white;
+      font-size: 1rem;
+    }
+
+    .cover-content {
+      position: absolute;
+      bottom: 0; left: 0; width: 100%; height: 40%;
+      padding: 15mm;
+      box-sizing: border-box;
+      z-index: 4;
+    }
+    
+    .cover-footer {
+      position: absolute;
+      bottom: 15mm; left: 15mm; right: 15mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo-mark {
+      color: var(--cyan);
+      font-size: 1.5rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .logo-mark span { color: var(--dark-blue); font-size: 1rem; font-family: 'Montserrat', sans-serif;}
+
+
+    /* --------------------------------------
+       PÁGINA 2: INTERIOR
+       -------------------------------------- */
+       
+    /* Interior Izquierda */
+    .panel-int-left {
+      background: white;
+      border-right: 1px solid #eee;
+    }
+    .diamond-grid {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 30px auto;
+    }
+    .diamond-line {
+      position: absolute;
+      top: 50%; left: 0; width: 100%; height: 1px;
+      background: #ccc;
+    }
+    .diamond-line.vert { transform: rotate(90deg); }
+    .diamond-item {
+      position: absolute;
+      width: 40px; height: 40px;
+      background: var(--dark-blue);
+      transform: rotate(45deg);
+      display: flex; justify-content: center; align-items: center;
+      color: white;
+    }
+    .diamond-item i { transform: rotate(-45deg); font-size: 1rem; }
+    .d-top { top: 0; left: 55px; background: var(--cyan); }
+    .d-bottom { bottom: 0; left: 55px; }
+    .d-left { top: 55px; left: 0; }
+    .d-right { top: 55px; right: 0; }
+
+    /* Interior Centro */
+    .panel-int-center {
+      background: white;
+      padding: 0;
+    }
+    
+    .center-top-text {
+      padding: 15mm;
+      padding-bottom: 0;
+    }
+    
+    .center-triangle-img {
+      width: 100%; height: 200px;
+      margin-top: 20px;
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+      background: #eee;
+      position: relative;
+    }
+    .center-triangle-img img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    
+    .center-triangle-accent {
+      position: absolute;
+      top: 40%; right: 15%; width: 40px; height: 40px;
+      background: var(--cyan);
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+      z-index: 3;
+      display: flex; justify-content: center; align-items: flex-end; padding-bottom: 5px; color: white; font-size: 0.8rem;
+    }
+
+    /* Interior Derecha */
+    .panel-int-right {
+      background: var(--dark-blue);
+      color: white;
+    }
+    .panel-int-right .section-title {
+      color: white;
+    }
+    .solution-item {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    .solution-icon {
+      width: 35px; height: 35px;
+      background: white;
+      border-radius: 4px;
+      display: flex; justify-content: center; align-items: center;
+      color: var(--dark-blue);
+      flex-shrink: 0;
+    }
+    .solution-text h4 {
+      margin: 0 0 5px 0; font-family: 'Montserrat', sans-serif; font-size: 0.85rem;
+    }
+    .solution-text p {
+      margin: 0; font-size: 0.7rem; color: #cbd5e1; line-height: 1.4;
+    }
+
+    /* TOOLBAR EDITABLE */
+    .editor-toolbar {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .editor-toolbar button {
+      background: var(--dark-blue);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .editor-toolbar button.print-btn { background: var(--cyan); }
+    .editor-toolbar button:hover { opacity: 0.9; }
+
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE HERRAMIENTAS -->
+  <div class="editor-toolbar">
+    <div style="font-weight: bold; font-size: 0.9rem; text-align:center; color:var(--dark-blue);">Modo Edición Activo</div>
+    <div style="font-size: 0.75rem; color:#666; width: 200px; text-align:center; margin-bottom: 10px;">
+      Haz clic en cualquier texto para modificarlo. Esta plantilla geométrica es para presentación institucional.
+    </div>
+    <button onclick="saveHTML()"><i class="fa-solid fa-download"></i> Guardar Cambios</button>
+    <button class="print-btn" onclick="window.print()"><i class="fa-solid fa-print"></i> Exportar a PDF</button>
+  </div>
+
+  <!-- PÁGINA 1: EXTERIOR -->
+  <div class="page-container" id="page-1">
+    
+    <!-- PANEL 1: Solapa Interna (Izquierda) -->
+    <div class="panel panel-flap">
+      <h3 class="section-title" contenteditable="true">NUESTRA PROPUESTA</h3>
+      
+      <p class="text-sm" contenteditable="true" style="margin-bottom: 20px;">
+        El sistema educativo dominicano genera millones de datos a través del Registro de Grado. SIGERA digitaliza este proceso para convertir el trabajo manual en información estratégica, garantizando precisión, transparencia y agilidad.
+      </p>
+      
+      <ul class="flap-list" contenteditable="true">
+        <li>Cálculo exacto de promedios de competencias (PC1-PC4).</li>
+        <li>Automatización de Completivas y Extraordinarias.</li>
+        <li>Alertas preventivas de inasistencia.</li>
+        <li>Boletines con formato oficial MINERD en segundos.</li>
+        <li>Cumplimiento riguroso de la Ordenanza 04-2023.</li>
+      </ul>
+      
+      <p class="text-sm" contenteditable="true" style="margin-top: 20px;">
+        Alineamos la gestión académica de su centro con los más altos estándares tecnológicos, reduciendo el riesgo de pérdida de información y errores humanos.
+      </p>
+      
+      <img src="scratch/pptx_extracted/ppt/media/image2.png" alt="Estadísticas" class="stats-chart" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'">
+    </div>
+
+    <!-- PANEL 2: Contraportada (Centro) -->
+    <div class="panel panel-backcover">
+      <div class="backcover-top">
+        <h3 style="font-size: 0.8rem; letter-spacing: 2px; margin: 0; color: var(--cyan);" contenteditable="true">COLEGIO / INSTITUCIÓN</h3>
+        <h2 contenteditable="true">EL PODER DE LOS DATOS<br>AL SERVICIO DE<br>LA EDUCACIÓN</h2>
+      </div>
+      
+      <div class="contact-info">
+        <h3 class="section-title" contenteditable="true">CONTACTO</h3>
+        
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div class="contact-text" contenteditable="true">
+            <strong>SEDE CENTRAL</strong><br>
+            Av. Winston Churchill #123,<br>
+            Santo Domingo, Rep. Dom.
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+          <div class="contact-text" contenteditable="true">
+            <strong>TELÉFONOS</strong><br>
+            Oficina: +1 809-555-0199<br>
+            Soporte: +1 809-555-0198
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div class="contact-text" contenteditable="true">
+            <strong>EN LÍNEA</strong><br>
+            info@sigera.edu.do<br>
+            www.sigera.edu.do
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 3: Portada Principal (Derecha) -->
+    <div class="panel panel-cover">
+      <div class="cover-top-bg"></div>
+      
+      <div class="cover-img-wrapper">
+        <img src="scratch/pptx_extracted/ppt/media/image31.jpeg" alt="Portada" onerror="this.src='https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
+      </div>
+      
+      <div class="cover-triangle-accent-1">01</div>
+      <div class="cover-triangle-accent-2"><i class="fa-solid fa-chart-simple"></i></div>
+      
+      <div class="cover-content">
+        <h1 class="title-main" contenteditable="true">SIGERA</h1>
+        <h2 class="title-sub" contenteditable="true">SISTEMA DE<br>GESTIÓN</h2>
+        
+        <p class="text-sm" contenteditable="true">
+          Solución integral para el registro y análisis del rendimiento académico en el nivel secundario. Cumplimiento absoluto con los estándares del MINERD.
+        </p>
+      </div>
+      
+      <div class="cover-footer">
+        <div class="logo-mark"><i class="fa-solid fa-cube"></i> <span contenteditable="true">SIGERA</span></div>
+        <div style="font-size: 0.75rem; font-weight: bold; color: var(--dark-blue);" contenteditable="true"><i class="fa-solid fa-mobile-screen"></i> +00 123 456 7890</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- PÁGINA 2: INTERIOR -->
+  <div class="page-container" id="page-2">
+    
+    <!-- PANEL 4: Interior Izquierda -->
+    <div class="panel panel-int-left">
+      <div class="diamond-grid">
+        <div class="diamond-line"></div>
+        <div class="diamond-line vert"></div>
+        <div class="diamond-item d-top"><i class="fa-solid fa-user-clock"></i></div>
+        <div class="diamond-item d-left"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="diamond-item d-right"><i class="fa-solid fa-calculator"></i></div>
+        <div class="diamond-item d-bottom"><i class="fa-solid fa-envelope"></i></div>
+      </div>
+      
+      <h3 class="section-title" contenteditable="true">OBJETIVOS CLAVE</h3>
+      <p class="text-sm" contenteditable="true" style="margin-bottom: 15px;">
+        SIGERA fue diseñado para resolver problemáticas reales de la gestión académica dominicana.
+      </p>
+      <p class="text-sm" contenteditable="true" style="margin-bottom: 15px;">
+        <strong>Eficiencia Docente:</strong> Eliminación del trabajo repetitivo en cálculos y transcripciones hacia los boletines de calificaciones.
+      </p>
+      <p class="text-sm" contenteditable="true">
+        <strong>Decisiones Basadas en Datos:</strong> La dirección escolar cuenta con analítica detallada de aprobación y riesgo escolar, actualizada cada vez que un docente ingresa una calificación.
+      </p>
+    </div>
+
+    <!-- PANEL 5: Interior Centro -->
+    <div class="panel panel-int-center">
+      <div class="center-top-text">
+        <h3 class="section-title" contenteditable="true">NUEVAS POSIBILIDADES</h3>
+        <p class="text-sm" contenteditable="true">
+          El sistema interconecta a toda la comunidad educativa. Los coordinadores pueden validar registros en tiempo real, mientras los directores visualizan el progreso del centro.
+        </p>
+      </div>
+      
+      <div style="position: relative;">
+        <div class="center-triangle-accent"><i class="fa-solid fa-lightbulb"></i></div>
+        <div class="center-triangle-img">
+          <img src="scratch/pptx_extracted/ppt/media/image19.png" alt="Aula" onerror="this.src='https://images.unsplash.com/photo-1571260899304-425dea5cf698?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
+        </div>
+      </div>
+      
+      <div class="center-top-text">
+        <h3 class="section-title" style="color:var(--dark-blue); font-size:1rem;" contenteditable="true">PREVENCIÓN ACADÉMICA</h3>
+        <p class="text-sm" contenteditable="true">
+          Gracias al motor de cálculos y reglas de evaluación (Ordenanza 04-2023), identificamos automáticamente a los estudiantes que necesitan apoyo y recuperación pedagógica temprana.
+        </p>
+      </div>
+    </div>
+
+    <!-- PANEL 6: Interior Derecha -->
+    <div class="panel panel-int-right">
+      <h3 class="section-title" contenteditable="true">COMPONENTES DEL SISTEMA</h3>
+      
+      <p class="text-sm" style="color: #cbd5e1; margin-bottom: 30px;" contenteditable="true">
+        Un ecosistema completo diseñado a la medida de la operatividad escolar.
+      </p>
+      
+      <div class="solution-item">
+        <div class="solution-icon"><i class="fa-solid fa-server"></i></div>
+        <div class="solution-text">
+          <h4 contenteditable="true">Motor de Cálculos Normativo</h4>
+          <p contenteditable="true">Evaluación automática de competencias, completivas (50/50) y extraordinarias (30/70).</p>
+        </div>
+      </div>
+      
+      <div class="solution-item">
+        <div class="solution-icon"><i class="fa-solid fa-file-pdf"></i></div>
+        <div class="solution-text">
+          <h4 contenteditable="true">Generación de Boletines</h4>
+          <p contenteditable="true">Exportación masiva de boletines idénticos al formato oficial del MINERD en un solo clic.</p>
+        </div>
+      </div>
+      
+      <div class="solution-item">
+        <div class="solution-icon"><i class="fa-solid fa-chart-pie"></i></div>
+        <div class="solution-text">
+          <h4 contenteditable="true">Dashboard Directivo</h4>
+          <p contenteditable="true">Métricas de rendimiento por sección, grado y docente, visibilidad total de aprobados y reprobados.</p>
+        </div>
+      </div>
+      
+      <div class="solution-item">
+        <div class="solution-icon"><i class="fa-solid fa-bell"></i></div>
+        <div class="solution-text">
+          <h4 contenteditable="true">Alertas Tempranas</h4>
+          <p contenteditable="true">Detección de estudiantes con ausentismo o con peligro de repitencia escolar.</p>
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+
+  <script>
+    function saveHTML() {
+      const htmlContent = document.documentElement.outerHTML;
+      const blob = new Blob([htmlContent], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Brochure_SIGERA_Geometrico_Editado.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
