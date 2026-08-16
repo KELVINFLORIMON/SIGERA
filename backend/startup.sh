@@ -3,6 +3,8 @@
 
 echo "Iniciando despliegue de SIGERA API..."
 
+cd backend || exit
+
 # 1. Aplicar las migraciones de la base de datos automáticamente
 echo "Aplicando migraciones de Alembic..."
 alembic upgrade head
